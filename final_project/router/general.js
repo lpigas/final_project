@@ -36,13 +36,14 @@ const getByKey = async(key, value)=>{
 
 // #1-10
 //  Get all books
-genl_routes.get('/',async function (req, res) {
-    try {
-      const bookList = await getBooks(); 
-      res.status(200).json({...bookList}); 
-    } catch (error) {
-      res.status(500).send(`Error retrieving book list`);
-    }
+genl_routes.get('/', function (req, res) {
+  getBooks()
+  .then((bookList) => {
+    res.status(200).json({ ...bookList });
+  })
+  .catch((error) => {
+    res.status(500).send("Error retrieving book list");
+  });
   
 });
 
